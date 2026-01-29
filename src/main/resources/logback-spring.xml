@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="APP_NAME"  source="spring.application.name" defaultValue="meowu-svc-xfile"/>
+    <springProperty scope="context" name="LOG_PATH"  source="logging.file.path"       defaultValue="logs"/>
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root"      defaultValue="INFO"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}-json.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}-json.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                            "APP_NAME": "${APP_NAME}",
+                            "LOG_DATE": "%d{yyyy-MM-dd HH:mm:ss.SSSXXX}",
+                            "LOG_TYPE": "%level",
+                            "TRACE_ID": "%X{traceId}",
+                            "SESSION_ID": "%X{sessionId}",
+                            "REQUEST_ID": "%X{requestId}",
+                            "REQUEST_PATH": "%X{requestPath}",
+                            "REQUEST_METHOD": "%X{requestMethod}",
+                            "CONTENT": "%msg"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- root -->
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_JSON"/>
+    </root>
+
+    <!-- logger -->
+</configuration>

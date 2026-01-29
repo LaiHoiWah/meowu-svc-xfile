@@ -39,11 +39,11 @@
             <artifactId>logstash-logback-encoder</artifactId>
         </dependency>
 
-        <!-- test -->
+        <!-- javaCV -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.9</version>
         </dependency>
 
         <!-- meowu -->
@@ -70,6 +70,13 @@
         <dependency>
             <groupId>com.meowu</groupId>
             <artifactId>svc-account-client</artifactId>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

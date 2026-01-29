@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: meowu-svc-xfile
+  datasource:
+    url: jdbc:h2:mem:test
+    username: admin
+    password: admin
+    driver-class-name: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 1
+      idle-timeout: 30000
+      max-lifetime: 180000
+      connection-timeout: 300000
+      auto-commit: false
+      pool-name: H2-Pool
+  h2:
+    console:
+      enabled: true
+      path: /h2/console
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+
+web:
+  mvc:
+    enabled: true
+    path-pattern: "/api/**"
+    allow-credentials: true
+    allowed-origin-patterns:
+      - "*"
+    allowed-headers:
+      - "*"
+    allowed-methods:
+      - "GET"
+      - "POST"
+      - "PATCH"
+      - "PUT"
+      - "DELETE"
+      - "OPTIONS"
+  gson:
+    enabled: true
+    serialize-nulls: true
+    disable-html-escaping: true
+    auto-scanning: true
+    base-packages:
+      - "com.meowu"
+  mdc:
+    enabled: true
+    url-pattern: "/api/*"
+
+logging:
+  file:
+    path: "logs"
+  level:
+    root: "INFO"

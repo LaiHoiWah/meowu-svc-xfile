@@ -1,7 +1,7 @@
 package com.meowu.svc.babylon.commons.utils;
 
 import com.meowu.starter.web.commons.mvc.constant.RequestHeaderConstants;
-import com.meowu.svc.babylon.commons.security.exception.DownloadException;
+import com.meowu.svc.babylon.commons.security.exception.ResourceDownloadException;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +33,7 @@ public class DownloadUtils{
             // write to response
             outputStream.write(content);
         }catch(Exception e){
-            throw new DownloadException(e.getMessage(), e);
+            throw new ResourceDownloadException(e.getMessage(), e);
         }
     }
 

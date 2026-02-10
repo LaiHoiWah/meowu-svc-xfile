@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: meowu-svc-xfile
+    name: meowu-svc-babylon
   datasource:
     url: jdbc:h2:mem:test
     username: admin
@@ -29,6 +29,18 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create
+  servlet:
+    multipart:
+      max-file-size: 5GB
+      max-request-size: 5GB
+      enabled: true
+      file-size-threshold: 5MB
+    file-dir:
+      audio: "E:\\resources\\audio"
+      video: "E:\\resources\\video"
+      document: "E:\\resources\\document"
+      picture: "E:\\resources\\picture"
+      others: "E:\\resources\\others"
 
 web:
   mvc:

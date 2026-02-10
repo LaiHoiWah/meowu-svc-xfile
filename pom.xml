@@ -39,11 +39,17 @@
             <artifactId>logstash-logback-encoder</artifactId>
         </dependency>
 
-        <!-- javaCV -->
+        <!-- java CV -->
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv-platform</artifactId>
-            <version>1.5.9</version>
+        </dependency>
+
+        <!-- sanselan -->
+        <dependency>
+            <groupId>org.apache.sanselan</groupId>
+            <artifactId>sanselan</artifactId>
+            <version>0.97-incubator</version>
         </dependency>
 
         <!-- meowu -->
